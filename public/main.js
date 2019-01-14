@@ -81,7 +81,7 @@ $('#search-author').click(async () => {
       `
       <div class="search-result p-3">
         <h4>${book.title}</h4>
-        <img src="book-images/${book.image}">
+        <img src="/book-images/${book.image}">
 
         <p><strong>Author:</strong> </p>
         <p>${book.author}</p>
