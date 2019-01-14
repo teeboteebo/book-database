@@ -45,6 +45,13 @@ async function getBooksByYears(fromYear, toYear) {
     contentType: 'application/json'
   }).catch(err => console.error(err));
 }
+async function getBooksByPages(minPages, maxPages) {
+  return await $.ajax({
+    url: '/json/books/pages/from/' + minPages + '/to/' + maxPages,
+    method: 'GET',
+    contentType: 'application/json'
+  }).catch(err => console.error(err));
+}
 
 
 

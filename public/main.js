@@ -192,7 +192,47 @@ $('#search-language').click(async () => {
 });
 
 
-$('#search-pages')
+$('#search-pages').click(async () => {
+  let minPages = $('#minPages-query').val();
+  let maxPages = $('#maxPages-query').val();
+  let books = await getBooksByPages(minPages, maxPages);
+
+  $('.book-list').empty();
+  $('.search-feedback').empty();
+
+  $('.search-feedback').append(`<p>Showing results that have between: "${minPages}" and "${maxPages}" amount of pages.</p>`);
+
+  for (let book of books) {
+    $('.book-list').append(
+      `
+      <div class="search-result p-3">
+        <h4>${book.title}</h4>
+        <img src="book-images/${book.image}">
+
+        <p><strong>Author:</strong> </p>
+        <p>${book.author}</p>
+
+        <p><strong>Published year:</strong></p>
+        <p>${book.year}</p>
+
+        <p><strong>Page count:</strong></p>
+        <p>${book.pages}</p>
+
+        <p><strong>Country:</strong></p>
+        <p>${book.country}</p>
+
+        <p><strong>Language:</strong></p>
+        <p>${book.language}</p>
+
+        <p><strong>More information:</strong></p>
+        <p><a href="${book.link}">Wikipedia</a></p>
+
+        <button type="button" class="btn btn-danger mt-3" data-id="${book._id}">Delete</button>
+      </div>
+      `
+    );
+  };
+});
 
 
 $('#search-title').click(async () => {

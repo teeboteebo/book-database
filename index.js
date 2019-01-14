@@ -106,9 +106,15 @@ function startWebServer(){
     res.json(books);
   });
 
+  app.get('/json/books/pages/from/:fromPages/to/:toPages', async (req, res) => {
+    const fromPages = req.params.fromPages;
+    const toPages = req.params.toPages;
+
+    let books = await Book.find({ pages: { $gte: fromPages, $lte: toPages } });
+    res.json(books);
+  });
   // Missing "maxage age" - same as minage but "$gte" instead.
   
-  // Missing "pages from-to" - same as year from-to but "pages" instead of "year"
 
   app.use(express.static('public'));
   
