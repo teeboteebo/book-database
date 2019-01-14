@@ -327,5 +327,6 @@ $('#search-year').click(async () => {
 $('.parent').on('click', '.delete', (e) => {
   let bookId = $(e.target).attr('data-id')
   deleteBook(bookId);
+  $(e.target).parent().remove();
 
 });
