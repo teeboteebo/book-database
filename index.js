@@ -101,6 +101,11 @@ function startWebServer(){
     res.json(books);
   });
 
+  app.get('/json/books/language/:language', async (req, res) => {
+    let books = await Book.find({ language: req.params.language });
+    res.json(books);
+  });
+
   // Missing "maxage age" - same as minage but "$gte" instead.
   
   // Missing "pages from-to" - same as year from-to but "pages" instead of "year"
