@@ -38,13 +38,15 @@ async function getBooksByTitle(title) {
   }).catch(err => console.error(err));
 }
 
-async function getBooks() {
+async function getBooksByYears(fromYear, toYear) {
   return await $.ajax({
-    url: '/json/books',
+    url: '/json/books/year/from/' + fromYear + '/to/' + toYear,
     method: 'GET',
     contentType: 'application/json'
   }).catch(err => console.error(err));
 }
+
+
 
 
 
