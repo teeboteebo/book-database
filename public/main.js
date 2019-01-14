@@ -31,8 +31,35 @@ $('#get-books').click(async () => {
   $('.book-list').empty();
 
   for (let book of books) {
-    $('.book-list').append('<p>' + book.title + '</p>');
-    $('.book-list').append('<button data-id="' + book._id + '">Delete</button>');
+    $('.book-list').append(
+      `
+      <div class="search-result p-3">
+        <img src="book-images/${book.image}">
+        <p><strong>Title:</strong></p>
+        <p>${book.title}</p>
+
+        <p><strong>Author:</strong> </p>
+        <p>${book.author}</p>
+
+        <p><strong>Published year:</strong></p>
+        <p>${book.year}</p>
+
+        <p><strong>Page count:</strong></p>
+        <p>${book.pages}</p>
+
+        <p><strong>Country:</strong></p>
+        <p>${book.country}</p>
+
+        <p><strong>Language:</strong></p>
+        <p>${book.language}</p>
+
+        <p><strong>More information:</strong></p>
+        <p><a href="${book.link}">Wikipedia</a></p>
+
+        <button type="button" class="btn btn-danger mt-3" data-id="${book._id}">Delete</button>
+      </div>
+      `
+    );
   };
 });
 
@@ -70,7 +97,7 @@ $('#search-author').click(async () => {
         <p><strong>Language:</strong></p>
         <p>${book.language}</p>
         
-        <button type="button" class="btn btn-danger" data-id="${book._id}">Delete</button>
+        <button type="button" class="btn btn-danger mt-3" data-id="${book._id}">Delete</button>
       </div>
       `
     );
@@ -110,7 +137,7 @@ $('#search-country').click(async () => {
         <p><strong>Language:</strong></p>
         <p>${book.language}</p>
 
-        <button type="button" class="btn btn-danger" data-id="${book._id}">Delete</button>
+        <button type="button" class="btn btn-danger mt-3" data-id="${book._id}">Delete</button>
       </div>
       `
     );
