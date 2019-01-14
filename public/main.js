@@ -34,9 +34,8 @@ $('#get-books').click(async () => {
     $('.book-list').append(
       `
       <div class="search-result p-3">
+        <h4>${book.title}</h4>
         <img src="book-images/${book.image}">
-        <p><strong>Title:</strong></p>
-        <p>${book.title}</p>
 
         <p><strong>Author:</strong> </p>
         <p>${book.author}</p>
@@ -75,11 +74,10 @@ $('#search-author').click(async () => {
     $('.book-list').append(
       `
       <div class="search-result p-3">
+        <h4>${book.title}</h4>
         <img src="book-images/${book.image}">
-        <p><strong>Title:</strong></p>
-        <p>${book.title}</p>
 
-        <p><strong>Author:</strong></p>
+        <p><strong>Author:</strong> </p>
         <p>${book.author}</p>
 
         <p><strong>Published year:</strong></p>
@@ -88,15 +86,15 @@ $('#search-author').click(async () => {
         <p><strong>Page count:</strong></p>
         <p>${book.pages}</p>
 
-        <p><strong>Wiki link:</strong></p>
-        <p>${book.link}</p>
-
         <p><strong>Country:</strong></p>
         <p>${book.country}</p>
 
         <p><strong>Language:</strong></p>
         <p>${book.language}</p>
-        
+
+        <p><strong>More information:</strong></p>
+        <p><a href="${book.link}">Wikipedia</a></p>
+
         <button type="button" class="btn btn-danger mt-3" data-id="${book._id}">Delete</button>
       </div>
       `
@@ -115,11 +113,10 @@ $('#search-country').click(async () => {
     $('.book-list').append(
       `
       <div class="search-result p-3">
+        <h4>${book.title}</h4>
         <img src="book-images/${book.image}">
-        <p><strong>Title:</strong></p>
-        <p>${book.title}</p>
 
-        <p><strong>Author:</strong></p>
+        <p><strong>Author:</strong> </p>
         <p>${book.author}</p>
 
         <p><strong>Published year:</strong></p>
@@ -128,14 +125,14 @@ $('#search-country').click(async () => {
         <p><strong>Page count:</strong></p>
         <p>${book.pages}</p>
 
-        <p><strong>Wiki link:</strong></p>
-        <p>${book.link}</p>
-
         <p><strong>Country:</strong></p>
         <p>${book.country}</p>
 
         <p><strong>Language:</strong></p>
         <p>${book.language}</p>
+
+        <p><strong>More information:</strong></p>
+        <p><a href="${book.link}">Wikipedia</a></p>
 
         <button type="button" class="btn btn-danger mt-3" data-id="${book._id}">Delete</button>
       </div>
