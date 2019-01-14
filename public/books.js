@@ -53,19 +53,6 @@ async function getBooksByPages(minPages, maxPages) {
   }).catch(err => console.error(err));
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 async function getBook(id) {
   return await $.ajax({
     url: '/json/books/' + id,

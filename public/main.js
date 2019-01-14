@@ -58,7 +58,7 @@ $('#get-books').click(async () => {
         <p><strong>More information:</strong></p>
         <p><a href="${book.link}">Wikipedia</a></p>
 
-        <button type="button" class="btn btn-danger mt-3" data-id="${book._id}">Delete</button>
+        <button type="button" class="btn btn-danger mt-3 delete" data-id="${book._id}">Delete</button>
       </div>
       `
     );
@@ -101,7 +101,7 @@ $('#search-author').click(async () => {
         <p><strong>More information:</strong></p>
         <p><a href="${book.link}">Wikipedia</a></p>
 
-        <button type="button" class="btn btn-danger mt-3" data-id="${book._id}">Delete</button>
+        <button type="button" class="btn btn-danger mt-3 delete" data-id="${book._id}">Delete</button>
       </div>
       `
     );
@@ -143,7 +143,7 @@ $('#search-country').click(async () => {
         <p><strong>More information:</strong></p>
         <p><a href="${book.link}">Wikipedia</a></p>
 
-        <button type="button" class="btn btn-danger mt-3" data-id="${book._id}">Delete</button>
+        <button type="button" class="btn btn-danger mt-3 delete" data-id="${book._id}">Delete</button>
       </div>
       `
     );
@@ -184,7 +184,7 @@ $('#search-language').click(async () => {
         <p><strong>More information:</strong></p>
         <p><a href="${book.link}">Wikipedia</a></p>
 
-        <button type="button" class="btn btn-danger mt-3" data-id="${book._id}">Delete</button>
+        <button type="button" class="btn btn-danger mt-3 delete" data-id="${book._id}">Delete</button>
       </div>
       `
     );
@@ -227,7 +227,7 @@ $('#search-pages').click(async () => {
         <p><strong>More information:</strong></p>
         <p><a href="${book.link}">Wikipedia</a></p>
 
-        <button type="button" class="btn btn-danger mt-3" data-id="${book._id}">Delete</button>
+        <button type="button" class="btn btn-danger mt-3 delete" data-id="${book._id}">Delete</button>
       </div>
       `
     );
@@ -269,7 +269,7 @@ $('#search-title').click(async () => {
         <p><strong>More information:</strong></p>
         <p><a href="${book.link}">Wikipedia</a></p>
 
-        <button type="button" class="btn btn-danger mt-3" data-id="${book._id}">Delete</button>
+        <button type="button" class="btn btn-danger mt-3 delete" data-id="${book._id}">Delete</button>
       </div>
       `
     );
@@ -312,9 +312,20 @@ $('#search-year').click(async () => {
         <p><strong>More information:</strong></p>
         <p><a href="${book.link}">Wikipedia</a></p>
 
-        <button type="button" class="btn btn-danger mt-3" data-id="${book._id}">Delete</button>
+        <button type="button" class="btn btn-danger mt-3 delete" data-id="${book._id}">Delete</button>
       </div>
       `
     );
   };
+});
+
+/* $('#delete').click(() => {
+  let bookId = $(this).attr('data-id')
+  deleteBook(bookId);
+}); */
+
+$('.parent').on('click', '.delete', (e) => {
+  let bookId = $(e.target).attr('data-id')
+  deleteBook(bookId);
+
 });
