@@ -22,22 +22,17 @@ async function getBooksByCountry(country) {
   }).catch(err => console.error(err));
 }
 
-
-
-
-
-
-async function getBooks() {
+async function getBooksByLanguage(language) {
   return await $.ajax({
-    url: '/json/books',
+    url: '/json/books/language/' + language,
     method: 'GET',
     contentType: 'application/json'
   }).catch(err => console.error(err));
 }
 
-async function getBooks() {
+async function getBooksByTitle(title) {
   return await $.ajax({
-    url: '/json/books',
+    url: '/json/books/title/' + title,
     method: 'GET',
     contentType: 'application/json'
   }).catch(err => console.error(err));

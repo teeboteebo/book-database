@@ -41,7 +41,7 @@
         </div>
         <p>Language</p>
         <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Language" aria-label="Recipient's username"
+          <input id="language-query" type="text" class="form-control" placeholder="Language" aria-label="Recipient's username"
             aria-describedby="button-addon2">
           <div class="input-group-append">
             <button id="search-language" class="btn btn-outline-secondary" type="button">Search</button>
@@ -71,7 +71,7 @@
         </div>
         <p>Title</p>
         <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Title" aria-label="Recipient's username"
+          <input id="title-query" type="text" class="form-control" placeholder="Title" aria-label="Recipient's username"
             aria-describedby="button-addon2">
           <div class="input-group-append">
             <button id="search-title" class="btn btn-outline-secondary" type="button" >Search</button>
@@ -79,7 +79,7 @@
         </div>
         <div class="row">
           <div class="col-12">
-            <p>YEAR</p>
+            <p>Year</p>
           </div>
           <div class="col-6">
             <div class="input-group mb-3">
@@ -103,15 +103,12 @@
 
     <div class="row my-5">
       <div class="col-12 text-center">
-          <button id="get-books">Get books</button>
+          <button id="get-books" type="button" class="btn btn-secondary">Show all books</button>
+          <div class="search-feedback mt-5"></div>
           <div class="book-list mt-5"></div>
-
       </div>
     </div>
   </div>
-
-  <img src="book-images/fairy-tales.jpg" alt="">
-
 
 </body>
 
