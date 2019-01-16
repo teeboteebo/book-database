@@ -1,6 +1,3 @@
-
-
-
 async function start() {
   //      Get all books
   // const books = await getBooks();
@@ -116,7 +113,7 @@ $('#search-country').click(async () => {
   $('.book-list').empty();
   $('.search-feedback').empty();
 
-  $('.search-feedback').append(`<p>Showing results for country: "${country}".</p>`);
+  $('.search-feedback').append(books.length==0 ? `Sorry, your search for "${country}" gave no results. :(` : `<p>Showing results for country: "${country}".</p>`);
 
   for (let book of books) {
     $('.book-list').append(
