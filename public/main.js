@@ -1,24 +1,3 @@
-async function start() {
-  //      Get all books
-  const books = await getBooks();
-  console.log(books);
-
-  //  Create new book
-  let newBook = {
-    "author": $('#author-query').text(),
-    "country": $('#country-query').text(),
-    "image": "missing.jpg",
-    "language": $('#language-query').text(),
-    "link": "www.google.com",
-    "pages": $('#pages-query').val(),
-    "title": $('#title-query').text(),
-    "year": $('#year-query').val()
-  };
-
-  // newBook = await createNewBook(newBook);
-  console.log('newBook: ', newBook);
-}
-
 // LOAD ALL BOOKS
 $('#get-books').click(async () => {
   let books = await getBooks();
@@ -69,7 +48,8 @@ $('#search-author').click(async () => {
   $('.book-list').empty();
   $('.search-feedback').empty();
 
-  $('.search-feedback').append(`<p>Showing results for author: "${author}".</p>`);
+  $('.search-feedback').append(books.length==0 ? `<p>Sorry, your search for "${author}" gave no results. :(</p>` : `<p>Showing results for author: "${author}".</p>`);
+
 
   for (let book of books) {
     $('.book-list').append(
@@ -146,6 +126,7 @@ $('#search-country').click(async () => {
   };
 });
 
+// LOAD MATCHING LANGUAGES
 $('#search-language').click(async () => {
   let language = $('#language-query').val();
   let books = await getBooksByLanguage(language);
@@ -153,7 +134,8 @@ $('#search-language').click(async () => {
   $('.book-list').empty();
   $('.search-feedback').empty();
 
-  $('.search-feedback').append(`<p>Showing results for language: "${language}".</p>`);
+  $('.search-feedback').append(books.length==0 ? `<p>Sorry, your search for "${language}" gave no results. :(</p>` : `<p>Showing results for language: "${language}".</p>`);
+
 
   for (let book of books) {
     $('.book-list').append(
@@ -187,7 +169,7 @@ $('#search-language').click(async () => {
   };
 });
 
-
+// LOAD MATCHING PAGES
 $('#search-pages').click(async () => {
   let minPages = $('#minPages-query').val();
   let maxPages = $('#maxPages-query').val();
@@ -196,7 +178,8 @@ $('#search-pages').click(async () => {
   $('.book-list').empty();
   $('.search-feedback').empty();
 
-  $('.search-feedback').append(`<p>Showing results that have between: "${minPages}" and "${maxPages}" amount of pages.</p>`);
+  $('.search-feedback').append(books.length==0 ? `<p>Sorry, your search for books with pages in between"${minPages}" and "${maxPages}" gave no results. :(</p>` : `<p>Showing results that have between: "${minPages}" and "${maxPages}" amount of pages.</p>`);
+
 
   for (let book of books) {
     $('.book-list').append(
@@ -230,7 +213,7 @@ $('#search-pages').click(async () => {
   };
 });
 
-
+// LOAD MATCHING TITLES
 $('#search-title').click(async () => {
   let title = $('#title-query').val();
   let books = await getBooksByTitle(title);
@@ -238,7 +221,7 @@ $('#search-title').click(async () => {
   $('.book-list').empty();
   $('.search-feedback').empty();
 
-  $('.search-feedback').append(`<p>Showing results for title: "${title}".</p>`);
+  $('.search-feedback').append(books.length==0 ? `<p>Sorry, your search for "${title}" gave no results. :(</p>` : `<p>Showing results for language: "${title}".</p>`);
 
   for (let book of books) {
     $('.book-list').append(
@@ -272,7 +255,7 @@ $('#search-title').click(async () => {
   };
 });
 
-
+// LOAD MATCHING YEARS
 $('#search-year').click(async () => {
   let fromYear = $('#year1-query').val();
   let toYear = $('#year2-query').val();
@@ -281,7 +264,8 @@ $('#search-year').click(async () => {
   $('.book-list').empty();
   $('.search-feedback').empty();
 
-  $('.search-feedback').append(`<p>Showing results published between the year: "${fromYear}" and "${toYear}".</p>`);
+  $('.search-feedback').append(`<p>Showing results published between the years: "${fromYear}" and "${toYear}".</p>`);
+  $('.search-feedback').append(books.length==0 ? `<p><p>Sorry, your search for books published between "${fromYear}" and "${toYear}" gave no results. :(</p>` : `<p>Showing results published between the years: "${fromYear}" and "${toYear}".</p>`);
 
   for (let book of books) {
     $('.book-list').append(
@@ -315,13 +299,14 @@ $('#search-year').click(async () => {
   };
 });
 
+// DELETE BOOK
 $('.parent').on('click', '.delete', (e) => {
   let bookId = $(e.target).attr('data-id')
   deleteBook(bookId);
   $(e.target).parent().remove();
-
 });
 
+// ADD NEW BOOK
 $('#add-book').click(async () => {
   $('.filter-container').empty();
   $('.filter-container').append(
@@ -368,9 +353,6 @@ $('#add-book').click(async () => {
 
   );
 });
-
-
-
 
 $('.parent').on('click', '#submit-book', (async () => {
   let newBook = {
@@ -470,3 +452,14 @@ $('.parent').on('click', '#submit-book', (async () => {
     </div>
   `);
 }));
+
+// EDIT EXISTING BOOK
+$('.parent').on('click', '.delete', (e) => {
+
+  let bookId = $(e.target).attr('data-id')
+
+  //updateBook(bookId <ATTRIBUTES>);
+
+  $(e.target).parent().remove();
+
+});
