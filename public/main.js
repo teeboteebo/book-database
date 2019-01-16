@@ -1,5 +1,5 @@
 // LOAD ALL BOOKS
-$('#get-books').click(async () => {
+$('.parent').on('click', '#get-books', async () => {
   let books = await getBooks();
 
   $('.book-list').empty();
@@ -41,7 +41,7 @@ $('#get-books').click(async () => {
 
 
 // LOAD MATCHING AUTHORS
-$('#search-author').click(async () => {
+$('.parent').on('click', '#search-author', async () => {
   let author = $('#author-query').val();
   let books = await getBooksByAuthor(author);
 
@@ -84,7 +84,7 @@ $('#search-author').click(async () => {
 });
 
 // LOAD MATCHING COUNTRIES
-$('#search-country').click(async () => {
+$('.parent').on('click', '#search-country', async () => {
   let country = $('#country-query').val();
   let books = await getBooksByCountry(country);
 
@@ -96,7 +96,7 @@ $('#search-country').click(async () => {
   for (let book of books) {
     $('.book-list').append(
       `
-      <div class="search-result p-3">
+      <div class="search-result p-3" data-id="${book._id}">
         <h4>${book.title}</h4>
         <img src="book-images/${book.image}">
 
@@ -127,7 +127,7 @@ $('#search-country').click(async () => {
 });
 
 // LOAD MATCHING LANGUAGES
-$('#search-language').click(async () => {
+$('.parent').on('click', '#search-language', async () => {
   let language = $('#language-query').val();
   let books = await getBooksByLanguage(language);
 
@@ -170,7 +170,7 @@ $('#search-language').click(async () => {
 });
 
 // LOAD MATCHING PAGES
-$('#search-pages').click(async () => {
+$('.parent').on('click', '#search-pages', async () => {
   let minPages = $('#minPages-query').val();
   let maxPages = $('#maxPages-query').val();
   let books = await getBooksByPages(minPages, maxPages);
@@ -214,7 +214,7 @@ $('#search-pages').click(async () => {
 });
 
 // LOAD MATCHING TITLES
-$('#search-title').click(async () => {
+$('.parent').on('click', '#search-title', async () => {
   let title = $('#title-query').val();
   let books = await getBooksByTitle(title);
 
@@ -256,7 +256,7 @@ $('#search-title').click(async () => {
 });
 
 // LOAD MATCHING YEARS
-$('#search-year').click(async () => {
+$('.parent').on('click', '#search-year', async () => {
   let fromYear = $('#year1-query').val();
   let toYear = $('#year2-query').val();
   let books = await getBooksByYears(fromYear, toYear);
@@ -264,7 +264,6 @@ $('#search-year').click(async () => {
   $('.book-list').empty();
   $('.search-feedback').empty();
 
-  $('.search-feedback').append(`<p>Showing results published between the years: "${fromYear}" and "${toYear}".</p>`);
   $('.search-feedback').append(books.length==0 ? `<p><p>Sorry, your search for books published between "${fromYear}" and "${toYear}" gave no results. :(</p>` : `<p>Showing results published between the years: "${fromYear}" and "${toYear}".</p>`);
 
   for (let book of books) {
@@ -454,9 +453,55 @@ $('.parent').on('click', '#submit-book', (async () => {
 }));
 
 // EDIT EXISTING BOOK
-$('.parent').on('click', '.delete', (e) => {
+$('.parent').on('click', '.edit', (e) => {
 
-  let bookId = $(e.target).attr('data-id')
+  let bookId = $(e.target).attr('data-id');
+  
+  let oldBook = {
+    "author": $('#author-query').val(),
+    "country": $('#country-query').val(),
+    "language": $('#language-query').val(),
+    "link": "https://en.wikipedia.org/wiki/Book",
+    "pages": $('#pages-query').val()*1,
+    "title": $('#title-query').val(),
+    "year": $('#year-query').val()*1
+  };
+
+  $(e.target).parent().empty();
+
+  $(e.target).parent().append(
+    `
+      <div class="search-result p-3">
+        <input id="new-title" type="text" value="${$('#old-title').val()}">
+        <img src="book-images/${oldBook.image}">
+
+        <p><strong>Author:</strong> </p>
+        <input id="new-author" type="text" value="${$('#old-author').val()}">
+
+        <p><strong>Published year:</strong></p>
+        <input id="new-year" type="text" value="${$('#old-year').val()}">
+
+        <p><strong>Page count:</strong></p>
+        <input id="new-pageCount" type="text" value="${$('#old-pageCount').val()}">
+
+        <p><strong>Country:</strong></p>
+        <input id="new-country" type="text" value="${$('#old-country').val()}">
+
+        <p><strong>Language:</strong></p>
+        <input id="new-language" type="text" value="${$('#old-language').val()}">
+
+        <p><strong>More information:</strong></p>
+        <p><a href="${oldBook.link}">Wikipedia</a></p>
+
+        <button type="button" class="btn btn-success mt-3 save" data-id="${bookId}">Save</button>
+        <button type="button" class="btn btn-danger mt-3 delete" data-id="${bookId}">Delete</button>
+      </div>
+    `
+  );
+
+
+
+
 
   //updateBook(bookId <ATTRIBUTES>);
 
