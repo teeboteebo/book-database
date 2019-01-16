@@ -393,7 +393,7 @@ let pasteBook = (bookData) => {
         <p>${book.language}</p>
 
         <p><strong>More information:</strong></p>
-        <p><a href="${book.link}">Wikipedia</a></p>
+        <p><a target="_blank" href="${book.link}">Wikipedia</a></p>
 
         <button type="button" class="btn btn-primary mt-3 edit" data-id="${book._id}">Edit</button>
         <button type="button" class="btn btn-danger mt-3 delete" data-id="${book._id}">Delete</button>
