@@ -48,7 +48,7 @@ $('.parent').on('click', '#search-author', async () => {
   $('.book-list').empty();
   $('.search-feedback').empty();
 
-  $('.search-feedback').append(books.length==0 ? `<p>Sorry, your search for "${author}" gave no results. :(</p>` : `<p>Showing results for author: "${author}".</p>`);
+  $('.search-feedback').append(books.length == 0 ? `<p>Sorry, your search for "${author}" gave no results. :(</p>` : `<p>Showing results for author: "${author}".</p>`);
 
 
   for (let book of books) {
@@ -91,7 +91,7 @@ $('.parent').on('click', '#search-country', async () => {
   $('.book-list').empty();
   $('.search-feedback').empty();
 
-  $('.search-feedback').append(books.length==0 ? `<p>Sorry, your search for "${country}" gave no results. :(</p>` : `<p>Showing results for country: "${country}".</p>`);
+  $('.search-feedback').append(books.length == 0 ? `<p>Sorry, your search for "${country}" gave no results. :(</p>` : `<p>Showing results for country: "${country}".</p>`);
 
   for (let book of books) {
     $('.book-list').append(
@@ -121,6 +121,31 @@ $('.parent').on('click', '#search-country', async () => {
         <button type="button" class="btn btn-primary mt-3 edit" data-id="${book._id}">Edit</button>
         <button type="button" class="btn btn-danger mt-3 delete" data-id="${book._id}">Delete</button>
       </div>
+      <div class="search-result p-3">
+      <input id="new-title" class="my-2" type="text" value="${book.title}">
+        <img src="book-images/${book.image}">
+
+        <p><strong>Author:</strong> </p>
+        <input id="new-author" type="text" value="${book.author}">
+
+        <p><strong>Published year:</strong></p>
+        <input id="new-year" type="text" value="${book.year}">
+
+        <p><strong>Page count:</strong></p>
+        <input id="new-pageCount" type="text" value="${book.pages}">
+
+        <p><strong>Country:</strong></p>
+        <input id="new-country" type="text" value="${book.country}">
+
+        <p><strong>Language:</strong></p>
+        <input id="new-language" type="text" value="${book.language}">
+
+        <p><strong>More information:</strong></p>
+        <p><a href="${book.link}">Wikipedia</a></p>
+
+        <button type="button" class="btn btn-success mt-3 save" data-id="${book._id}">Save</button>
+        <button type="button" class="btn btn-danger mt-3 delete" data-id="${book._id}">Delete</button>
+        </div>
       `
     );
   };
@@ -134,7 +159,7 @@ $('.parent').on('click', '#search-language', async () => {
   $('.book-list').empty();
   $('.search-feedback').empty();
 
-  $('.search-feedback').append(books.length==0 ? `<p>Sorry, your search for "${language}" gave no results. :(</p>` : `<p>Showing results for language: "${language}".</p>`);
+  $('.search-feedback').append(books.length == 0 ? `<p>Sorry, your search for "${language}" gave no results. :(</p>` : `<p>Showing results for language: "${language}".</p>`);
 
 
   for (let book of books) {
@@ -178,7 +203,7 @@ $('.parent').on('click', '#search-pages', async () => {
   $('.book-list').empty();
   $('.search-feedback').empty();
 
-  $('.search-feedback').append(books.length==0 ? `<p>Sorry, your search for books with pages in between"${minPages}" and "${maxPages}" gave no results. :(</p>` : `<p>Showing results that have between: "${minPages}" and "${maxPages}" amount of pages.</p>`);
+  $('.search-feedback').append(books.length == 0 ? `<p>Sorry, your search for books with pages in between"${minPages}" and "${maxPages}" gave no results. :(</p>` : `<p>Showing results that have between: "${minPages}" and "${maxPages}" amount of pages.</p>`);
 
 
   for (let book of books) {
@@ -221,7 +246,7 @@ $('.parent').on('click', '#search-title', async () => {
   $('.book-list').empty();
   $('.search-feedback').empty();
 
-  $('.search-feedback').append(books.length==0 ? `<p>Sorry, your search for "${title}" gave no results. :(</p>` : `<p>Showing results for language: "${title}".</p>`);
+  $('.search-feedback').append(books.length == 0 ? `<p>Sorry, your search for "${title}" gave no results. :(</p>` : `<p>Showing results for language: "${title}".</p>`);
 
   for (let book of books) {
     $('.book-list').append(
@@ -264,7 +289,7 @@ $('.parent').on('click', '#search-year', async () => {
   $('.book-list').empty();
   $('.search-feedback').empty();
 
-  $('.search-feedback').append(books.length==0 ? `<p><p>Sorry, your search for books published between "${fromYear}" and "${toYear}" gave no results. :(</p>` : `<p>Showing results published between the years: "${fromYear}" and "${toYear}".</p>`);
+  $('.search-feedback').append(books.length == 0 ? `<p><p>Sorry, your search for books published between "${fromYear}" and "${toYear}" gave no results. :(</p>` : `<p>Showing results published between the years: "${fromYear}" and "${toYear}".</p>`);
 
   for (let book of books) {
     $('.book-list').append(
@@ -291,6 +316,7 @@ $('.parent').on('click', '#search-year', async () => {
         <p><strong>More information:</strong></p>
         <p><a href="${book.link}">Wikipedia</a></p>
 
+        <button type="button" class="btn btn-primary mt-3 edit" data-id="${book._id}">Edit</button>
         <button type="button" class="btn btn-danger mt-3 delete" data-id="${book._id}">Delete</button>
       </div>
       `
@@ -360,14 +386,14 @@ $('.parent').on('click', '#submit-book', (async () => {
     "image": "missing.jpg",
     "language": $('#language-query').val(),
     "link": "https://en.wikipedia.org/wiki/Book",
-    "pages": $('#pages-query').val()*1,
+    "pages": $('#pages-query').val() * 1,
     "title": $('#title-query').val(),
-    "year": $('#year-query').val()*1
+    "year": $('#year-query').val() * 1
   };
 
   newBook = await createNewBook(newBook);
   console.log('newBook: ', newBook);
-  
+
   $('.filter-container').empty();
 
   $('.filter-container').append(`
@@ -453,58 +479,123 @@ $('.parent').on('click', '#submit-book', (async () => {
 }));
 
 // EDIT EXISTING BOOK
-$('.parent').on('click', '.edit', (e) => {
+$('.parent').on('click', '.edit', async (e) => {
 
   let bookId = $(e.target).attr('data-id');
-  
-  let oldBook = {
-    "author": $('#author-query').val(),
-    "country": $('#country-query').val(),
-    "language": $('#language-query').val(),
-    "link": "https://en.wikipedia.org/wiki/Book",
-    "pages": $('#pages-query').val()*1,
-    "title": $('#title-query').val(),
-    "year": $('#year-query').val()*1
-  };
+  let book = await getBook(bookId);
+  let searchResult = $(e.target).parent();
 
-  $(e.target).parent().empty();
+  $(searchResult).empty();
 
-  $(e.target).parent().append(
+  $(searchResult).append(
     `
-      <div class="search-result p-3">
-        <input id="new-title" type="text" value="${$('#old-title').val()}">
-        <img src="book-images/${oldBook.image}">
+      <input class="new-title" type="text" value="${book.title}">
+      <img src="book-images/${book.image}">
 
-        <p><strong>Author:</strong> </p>
-        <input id="new-author" type="text" value="${$('#old-author').val()}">
+      <p><strong>Author:</strong> </p>
+      <input class="new-author" type="text" value="${book.author}">
 
-        <p><strong>Published year:</strong></p>
-        <input id="new-year" type="text" value="${$('#old-year').val()}">
+      <p><strong>Published year:</strong></p>
+      <input class="new-year" type="text" value="${book.year}">
 
-        <p><strong>Page count:</strong></p>
-        <input id="new-pageCount" type="text" value="${$('#old-pageCount').val()}">
+      <p><strong>Page count:</strong></p>
+      <input class="new-pageCount" type="text" value="${book.pages}">
 
-        <p><strong>Country:</strong></p>
-        <input id="new-country" type="text" value="${$('#old-country').val()}">
+      <p><strong>Country:</strong></p>
+      <input class="new-country" type="text" value="${book.country}">
 
-        <p><strong>Language:</strong></p>
-        <input id="new-language" type="text" value="${$('#old-language').val()}">
+      <p><strong>Language:</strong></p>
+      <input class="new-language" type="text" value="${book.language}">
 
-        <p><strong>More information:</strong></p>
-        <p><a href="${oldBook.link}">Wikipedia</a></p>
+      <p><strong>More information:</strong></p>
+      <p><a href="${book.link}">Wikipedia</a></p>
 
-        <button type="button" class="btn btn-success mt-3 save" data-id="${bookId}">Save</button>
-        <button type="button" class="btn btn-danger mt-3 delete" data-id="${bookId}">Delete</button>
-      </div>
+      <button type="button" class="btn btn-secondary mt-3 cancel" data-id="${book._id}">Cancel</button>
+      <button type="button" class="btn btn-success mt-3 save" data-id="${book._id}">Save</button>
     `
   );
 
+});
 
+$('.parent').on('click', '.save', async (e) => {
+  let bookId = $(e.target).attr('data-id');
+  let searchResult = $(e.target).parent();
 
+  let newValues = {
+    "author": $('.new-author').val(),
+    "country": $('.new-country').val(),
+    "language": $('.new-language').val(),
+    "pages": $('.new-pageCount').val() * 1,
+    "title": $('.new-title').val(),
+    "year": $('.new-year').val() * 1
+  };
 
+  let book = await updateBook(bookId, newValues);
+  book = await getBook(bookId);
 
-  //updateBook(bookId <ATTRIBUTES>);
+  $(searchResult).empty();
 
-  $(e.target).parent().remove();
+  $(searchResult).append(
+    `
+      <h4>${book.title}</h4>
+      <img src="book-images/${book.image}">
 
+      <p><strong>Author:</strong> </p>
+      <p>${book.author}</p>
+
+      <p><strong>Published year:</strong></p>
+      <p>${book.year}</p>
+
+      <p><strong>Page count:</strong></p>
+      <p>${book.pages}</p>
+
+      <p><strong>Country:</strong></p>
+      <p>${book.country}</p>
+
+      <p><strong>Language:</strong></p>
+      <p>${book.language}</p>
+
+      <p><strong>More information:</strong></p>
+      <p><a href="${book.link}">Wikipedia</a></p>
+
+      <button type="button" class="btn btn-primary mt-3 edit" data-id="${book._id}">Edit</button>
+      <button type="button" class="btn btn-danger mt-3 delete" data-id="${book._id}">Delete</button>
+    `
+  );
+});
+
+$('.parent').on('click', '.cancel', async (e) => {
+  let bookId = $(e.target).attr('data-id');
+  let book = await getBook(bookId);
+  let searchResult = $(e.target).parent();
+
+  $(searchResult).empty();
+
+  $(searchResult).append(
+    `
+      <h4>${book.title}</h4>
+      <img src="book-images/${book.image}">
+
+      <p><strong>Author:</strong> </p>
+      <p>${book.author}</p>
+
+      <p><strong>Published year:</strong></p>
+      <p>${book.year}</p>
+
+      <p><strong>Page count:</strong></p>
+      <p>${book.pages}</p>
+
+      <p><strong>Country:</strong></p>
+      <p>${book.country}</p>
+
+      <p><strong>Language:</strong></p>
+      <p>${book.language}</p>
+
+      <p><strong>More information:</strong></p>
+      <p><a href="${book.link}">Wikipedia</a></p>
+
+      <button type="button" class="btn btn-primary mt-3 edit" data-id="${book._id}">Edit</button>
+      <button type="button" class="btn btn-danger mt-3 delete" data-id="${book._id}">Delete</button>
+    `
+  );
 });
